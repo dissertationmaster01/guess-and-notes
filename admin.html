@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - GuessNotesByDavid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex h-screen">
+
+        <!-- Sidebar -->
+        <div class="w-72 bg-gray-900 text-white p-6 overflow-auto">
+            <h2 class="text-2xl font-bold mb-8">Admin Panel</h2>
+            <ul class="space-y-2">
+                <li onclick="showSection('dashboard')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-home"></i> Dashboard
+                </li>
+                <li onclick="showSection('upload')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-upload"></i> Upload New Note
+                </li>
+                <li onclick="showSection('allnotes')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-list"></i> All Notes
+                </li>
+                <li onclick="showSection('users')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-users"></i> Users
+                </li>
+                <li onclick="showSection('orders')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-shopping-cart"></i> Orders
+                </li>
+                <li onclick="showSection('analytics')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-chart-bar"></i> Analytics
+                </li>
+                <li onclick="showSection('messages')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-envelope"></i> Messages
+                </li>
+                <li onclick="showSection('settings')" class="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 rounded-xl cursor-pointer">
+                    <i class="fas fa-cog"></i> Settings
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8 overflow-auto">
+
+            <!-- Dashboard -->
+            <div id="dashboard" class="admin-section">
+                <h1 class="text-4xl font-bold mb-8">Dashboard</h1>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h3 class="text-gray-500">Total Notes</h3>
+                        <p class="text-5xl font-bold mt-2">248</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h3 class="text-gray-500">Total Sales</h3>
+                        <p class="text-5xl font-bold mt-2">Rs. 1,24,560</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h3 class="text-gray-500">Active Users</h3>
+                        <p class="text-5xl font-bold mt-2">1,284</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl shadow">
+                        <h3 class="text-gray-500">Today Sales</h3>
+                        <p class="text-5xl font-bold mt-2">Rs. 8,450</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Note -->
+            <div id="upload" class="admin-section hidden">
+                <h1 class="text-4xl font-bold mb-8">Upload New Note</h1>
+                <div class="bg-white rounded-3xl p-10 max-w-2xl">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Note Title</label>
+                        <input type="text" class="w-full border rounded-xl px-4 py-3" placeholder="e.g. Intermediate Physics Guess Paper 2026">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Category</label>
+                        <select class="w-full border rounded-xl px-4 py-3">
+                            <option>Matric</option>
+                            <option>Intermediate</option>
+                            <option>Bachelor</option>
+                            <option>Master</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium mb-2">Upload PDF File</label>
+                        <input type="file" class="w-full border rounded-xl px-4 py-3">
+                    </div>
+                    <button onclick="alert('Note Uploaded Successfully! ✅')" class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-blue-700">
+                        Upload Note
+                    </button>
+                </div>
+            </div>
+
+            <!-- All Notes -->
+            <div id="allnotes" class="admin-section hidden">
+                <h1 class="text-4xl font-bold mb-8">All Uploaded Notes</h1>
+                <table class="w-full bg-white rounded-3xl shadow">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="text-left p-6">Title</th>
+                            <th class="text-left p-6">Category</th>
+                            <th class="text-left p-6">Date</th>
+                            <th class="text-center p-6">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-6">Intermediate Physics Guess Paper 2026</td>
+                            <td class="p-6">Intermediate</td>
+                            <td class="p-6">03 Jul 2026</td>
+                            <td class="p-6 text-center">
+                                <button onclick="alert('Deleted!')" class="text-red-600 hover:text-red-700"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Analytics -->
+            <div id="analytics" class="admin-section hidden">
+                <h1 class="text-4xl font-bold mb-8">Analytics</h1>
+                <div class="bg-white p-8 rounded-3xl shadow">
+                    <h3 class="text-xl font-semibold mb-6">Sales Overview</h3>
+                    <canvas id="salesChart" height="120"></canvas>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div id="settings" class="admin-section hidden">
+                <h1 class="text-4xl font-bold mb-8">Website Settings</h1>
+                
+                <div class="bg-white rounded-3xl p-10">
+                    <h3 class="text-2xl font-semibold mb-8">General Settings</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Website Name</label>
+                            <input type="text" value="GuessNotesByDavid" class="w-full border rounded-xl px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Contact Email</label>
+                            <input type="email" value="david@guessnotes.com" class="w-full border rounded-xl px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Phone Number</label>
+                            <input type="text" value="+92 304 7019162" class="w-full border rounded-xl px-4 py-3">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Address</label>
+                            <textarea class="w-full border rounded-xl px-4 py-3 h-24">Chichawatni, Punjab, Pakistan</textarea>
+                        </div>
+                    </div>
+                    
+                    <button onclick="alert('Settings Saved!')" class="mt-10 bg-blue-600 text-white px-10 py-4 rounded-2xl font-semibold hover:bg-blue-700">
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const ctx = document.getElementById('salesChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12000, 19000, 15000, 25000, 22000, 30000],
+                            borderColor: '#2563eb',
+                            tension: 0.4
+                        }]
+                    }
+                });
+            }
+        };
+    </script>
+
+</body>
+</html>

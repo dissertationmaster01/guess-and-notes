@@ -1,0 +1,15 @@
+# robots.txt for GuessNotesByDavid
+User-agent: *
+Allow: /
+
+# Block admin and sensitive pages
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config/
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
